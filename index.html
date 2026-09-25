@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casting · El bar que se tragó a todos los españoles · No Damos Crédito</title>
+<meta name="theme-color" content="#2b2825">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{--amarillo:#f7f200;--negro:#111;--granate:#5e120e;--hueso:#f0ead8;--fondo:#2b2825;--fondo2:#36322e;--linea:#45403a;--suave:#9a9283;--gris:#6e675c;--pad:clamp(1.2rem,5vw,5rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:clip;font-family:"Archivo",system-ui,sans-serif;background:var(--fondo);color:var(--hueso);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,video{display:block;max-width:100%}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--amarillo);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* hero */
+.hero{position:relative;min-height:min(68vh,640px);display:flex;flex-direction:column;justify-content:flex-end;gap:1.2rem;padding:var(--pad);padding-top:5rem;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;object-position:50% 25%;opacity:.3}
+@media(min-width:900px){.hero .bg{left:auto;width:62%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 45%);mask-image:linear-gradient(90deg,transparent,#000 45%);opacity:.38}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(43,40,37,.2) 0%,rgba(43,40,37,.55) 55%,var(--fondo) 100%)}
+.marca{font-size:.9rem;font-weight:800;letter-spacing:.02em;color:var(--amarillo);text-transform:uppercase}
+.hero h1{font-size:clamp(2.4rem,7.4vw,6.8rem);font-weight:800;line-height:.9;letter-spacing:-.04em;font-variation-settings:"wdth" 106;max-width:14ch;text-wrap:balance}
+.hero h1 span{color:var(--amarillo)}
+.hero .autor{font-weight:700;font-size:clamp(1rem,1.6vw,1.3rem)}
+/* secciones */
+section{padding:var(--pad);padding-top:clamp(1.4rem,3vw,2.6rem);max-width:1600px;margin:0 auto}
+section + section{border-top:2px solid var(--linea)}
+.cab{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.4rem}
+h2{font-size:clamp(1.9rem,4.6vw,3.8rem);font-weight:800;line-height:.95;letter-spacing:-.035em;font-variation-settings:"wdth" 106}
+h3.sub{font-size:clamp(1.1rem,2vw,1.5rem);font-weight:800;letter-spacing:-.02em;margin:2.6rem 0 1rem;display:flex;align-items:baseline;gap:.6rem}
+h3.sub span{font-size:.85rem;font-weight:700;color:var(--suave)}
+.tabs{display:flex;border:2px solid var(--hueso)}
+.tabs button{padding:.6rem 1rem;font-weight:800;font-size:.95rem}
+.tabs button[aria-pressed="true"]{background:var(--amarillo);color:var(--negro)}
+
+/* notas */
+.notas{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin-bottom:2rem}
+.nota{background:var(--amarillo);color:var(--negro);padding:1rem 1.1rem;font-size:.98rem;font-weight:600;line-height:1.35}
+.nota b{display:block;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.nota.g{background:var(--granate);color:var(--hueso)}
+.nota.g b{color:var(--amarillo)}
+
+/* leyenda */
+.ley{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:1rem;font-size:.85rem;font-weight:700}
+.ley i{display:inline-block;width:1.4rem;height:.8rem;margin-right:.45rem;vertical-align:-1px}
+.ley .c{background:var(--hueso)}.ley .p{background:var(--gris)}.ley .r{background:repeating-linear-gradient(135deg,var(--amarillo) 0 3px,transparent 3px 7px);box-shadow:inset 0 0 0 1.5px var(--amarillo)}
+
+/* gráfico */
+.chart{position:relative;--rh:30px;height:calc(var(--rows) * var(--rh))}
+.row{position:absolute;left:0;right:0;top:0;height:var(--rh);display:grid;grid-template-columns:minmax(0,15rem) 1fr 5.4rem;align-items:center;gap:1rem;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.row .nm{font-size:.95rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.row .nm:hover{color:var(--amarillo);text-decoration:underline;text-underline-offset:3px}
+.row .tr{height:100%;display:flex;align-items:center}
+.row .br{height:18px;width:0;min-width:3px;background:var(--hueso);transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.row.menor .br{background:var(--gris)}
+.row.menor .nm,.row.menor .vl{color:var(--suave)}
+.row.top1 .br{background:var(--amarillo)}
+.row.recorte .br{background:linear-gradient(90deg,var(--c,var(--hueso)) 0 85%,transparent 85%),repeating-linear-gradient(135deg,var(--amarillo) 0 3px,transparent 3px 7px)}
+.row.recorte.top1 .br{--c:var(--amarillo)}
+.row:hover .br{filter:brightness(1.25)}
+.row .vl{font-size:.95rem;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.row .vl small{font-size:.7rem;color:var(--amarillo);margin-left:.3rem}
+.chart.esc .br{background-image:repeating-linear-gradient(90deg,transparent 0 calc(100% / var(--n) - 3px),var(--fondo) calc(100% / var(--n) - 3px) calc(100% / var(--n)))!important}
+
+/* galería */
+.buscar{border:0;border-bottom:2px solid var(--hueso);background:transparent;color:var(--hueso);font:inherit;font-weight:700;font-size:1rem;padding:.55rem 0;min-width:14rem;outline:0}
+.buscar::placeholder{color:var(--suave)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem 1.2rem}
+.card{display:block}
+.ph{position:relative;aspect-ratio:3/4;background:var(--granate);overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s,transform .5s}
+.ph img.ok{opacity:1}
+.ph .ini{position:absolute;left:.8rem;bottom:.5rem;font-size:clamp(3rem,6vw,5rem);font-weight:900;line-height:.85;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px var(--amarillo);font-variation-settings:"wdth" 120}
+.ph .rk{position:absolute;right:.6rem;top:.55rem;z-index:2;font-size:.78rem;font-weight:900;background:var(--amarillo);color:var(--negro);padding:.15rem .4rem}
+.card:hover .ph img{transform:scale(1.03)}
+.card h4{margin-top:.8rem;font-size:1.15rem;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.card:hover h4{color:var(--amarillo)}
+.card p{margin-top:.35rem;font-size:.92rem;line-height:1.4;color:#cfc7b4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .dt{margin-top:.5rem;font-size:.8rem;font-weight:800;color:var(--amarillo);font-variant-numeric:tabular-nums}
+.card.coro .ph{background:var(--amarillo)}
+.card.coro .ph .ini{-webkit-text-stroke-color:var(--negro)}
+
+/* ficha */
+.ficha{position:fixed;inset:0;z-index:50;background:var(--fondo);overflow-y:auto;overscroll-behavior:contain}
+.ficha-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(1.5rem,5vw,5rem);padding:var(--pad);padding-bottom:7rem;max-width:1500px;margin:0 auto}
+.volver{grid-column:1/-1;justify-self:start;font-weight:800;font-size:1rem;color:var(--amarillo);min-height:2.5rem;display:inline-flex;align-items:center}
+.volver:hover{text-decoration:underline;text-underline-offset:4px}
+.ficha .ph{position:sticky;top:var(--pad)}
+.ficha .ph .ini{font-size:clamp(5rem,11vw,10rem)}
+.ficha h2{font-size:clamp(2.6rem,6.5vw,6rem);line-height:.9}
+.def{margin-top:1rem;font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:500;line-height:1.3;max-width:34ch}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;padding-top:1rem;border-top:4px solid var(--amarillo)}
+.nums b{color:var(--amarillo);display:block;font-size:clamp(2.2rem,5vw,4.4rem);font-weight:900;line-height:.95;letter-spacing:-.04em;font-variation-settings:"wdth" 112;font-variant-numeric:tabular-nums}
+.nums span{font-size:.85rem;font-weight:700}
+.ficha .nota{margin-top:1.6rem}
+.bloque{margin-top:2.6rem}
+.bloque h5{font-size:.8rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--amarillo);margin-bottom:.9rem}
+.strip{display:grid;grid-template-columns:repeat(38,1fr);gap:3px}
+.strip i{height:44px;background:var(--fondo2)}
+.strip i.h{background:var(--amarillo)}
+.strip i.a{background:transparent;box-shadow:inset 0 0 0 2px var(--amarillo)}
+.strip i.d{background:repeating-linear-gradient(135deg,var(--amarillo) 0 2px,transparent 2px 6px)}
+.strip i.m{background:var(--amarillo)}
+.eje{display:grid;grid-template-columns:repeat(38,1fr);gap:3px;margin-top:.4rem;font-size:.7rem;font-weight:700;color:var(--suave)}
+.eje span{white-space:nowrap}
+.quien{font-size:clamp(1rem,1.3vw,1.18rem);line-height:1.55;max-width:60ch}
+.mom{list-style:none;display:grid;gap:.9rem}
+.mom li{display:grid;grid-template-columns:4rem 1fr;gap:.8rem;align-items:baseline}
+.mom em{font-style:normal;font-size:.8rem;font-weight:800;color:var(--amarillo)}
+.mom p{font-size:clamp(1.05rem,1.5vw,1.3rem);font-weight:600;line-height:1.3}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips span{border:2px solid var(--hueso);padding:.4rem .7rem;font-size:.9rem;font-weight:700}
+.yt{position:relative;aspect-ratio:16/9;background:#000}
+.yt #yt-player,.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vids{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.vids video{width:100%;background:#000}
+.pasar{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1rem;border-top:2px solid var(--linea);font-weight:800}
+.pasar a:hover{color:var(--amarillo)}
+.pie{padding:var(--pad);padding-bottom:7rem;font-size:.8rem;color:var(--suave);max-width:1600px;margin:0 auto}
+
+/* botones flotantes */
+.flota{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:max(1rem,env(safe-area-inset-bottom));z-index:80;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem}
+.flota a{display:inline-flex;align-items:center;gap:.6rem;height:3.4rem;padding:0 1.2rem 0 1rem;font-weight:800;font-size:.98rem;box-shadow:0 10px 26px rgba(0,0,0,.22);transition:transform .2s}
+.flota a:hover{transform:translateY(-2px)}
+.flota svg{width:1.5rem;height:1.5rem;flex:none;fill:currentColor}
+.flota .wa{background:var(--hueso);color:var(--negro)}
+.flota .pr{background:var(--amarillo);color:var(--negro)}
+
+@media(max-width:760px){
+  .chart{--rh:28px}
+  .row{grid-template-columns:minmax(0,8.5rem) 1fr 3.6rem;gap:.6rem}
+  .row .nm,.row .vl{font-size:.8rem}
+  .row .br{height:14px}
+  .row .vl small{display:none}
+  .grid{grid-template-columns:1fr 1fr;gap:1.6rem .8rem}
+  .ficha-in{grid-template-columns:1fr}
+  .ficha .ph{position:relative;top:0;max-width:62%}
+  .strip,.eje{gap:2px}
+  .strip i{height:30px}
+  .vids{grid-template-columns:1fr}
+  .flota a{width:3.4rem;padding:0;justify-content:center}
+  .flota a span{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="bg" src="assets/img/portada.jpg" alt="" aria-hidden="true">
+  <p class="marca">Casting · No Damos Crédito</p>
+  <h1>El bar que se tragó a todos los <span>españoles</span></h1>
+  <p class="autor">Una obra de Alfredo Sanzol</p>
+</header>
+
+<section id="reparto">
+  <div class="cab">
+    <h2>El reparto</h2>
+    <div class="tabs" role="group" aria-label="Métrica">
+      <button data-m="palabras" aria-pressed="true">Palabras</button>
+      <button data-m="intervenciones" aria-pressed="false">Intervenciones</button>
+      <button data-m="escenas" aria-pressed="false">Escenas</button>
+    </div>
+  </div>
+  <div class="notas">
+    <p class="nota"><b>Casting</b>El casting se hará sobre personajes con más de 200 palabras. Del resto se harán combinados de pequeñas partes cómicas en función de la cantidad de personas que seamos.</p>
+    <p class="nota g"><b>Texto redistribuido</b>Jorge Arizmendi tendrá aproximadamente un 15 % menos de texto, que se redistribuirá a otros personajes. De la misma manera con Margaret Miller.</p>
+  </div>
+  <div class="ley"><span><i class="c"></i>Casting (más de 200 palabras)</span><span><i class="p"></i>Pequeñas partes combinadas</span><span><i class="r"></i>Texto que se redistribuye</span></div>
+  <div class="chart" id="chart"></div>
+</section>
+
+<section id="personajes">
+  <div class="cab">
+    <h2>Personajes</h2>
+    <input class="buscar" id="buscar" type="search" placeholder="Buscar personaje" aria-label="Buscar personaje">
+  </div>
+  <div id="grupos"></div>
+</section>
+
+<footer class="pie">El bar que se tragó a todos los españoles, de Alfredo Sanzol · No Damos Crédito</footer>
+
+<div class="ficha" id="ficha" hidden></div>
+
+<nav class="flota" aria-label="Enlaces">
+  <a class="wa" href="https://chat.whatsapp.com/EVvSCDCdy7LKGFYjKRcyW0" target="_blank" rel="noopener" aria-label="Grupo de WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.5 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3z"/></svg><span>Grupo de WhatsApp</span></a>
+  <a class="pr" href="https://moneyprinternepo.github.io/El-Bar-que-se-trag-a-todos-los-espa-oles/" target="_blank" rel="noopener" aria-label="Ver la presentación de la obra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v12H3zM5 6v8h14V6zM11 17h2v2h4v2H7v-2h4zM10 8l5 3-5 3z"/></svg><span>Ver la presentación</span></a>
+</nav>
+
+<script>
+/* ===== FRAGMENTOS DE LA OBRA GRABADA =====
+   Un fragmento por personaje: 'slug': ['inicio', 'fin'] en mm:ss o h:mm:ss.
+   Se reproduce solo, en silencio, desde el vídeo de YouTube. */
+var VIDEO_OBRA = 'k0pMpJhVOdU';
+var FRAGMENTOS = {
+  'jorge-arizmendi': ['13:04', '14:41'],
+  'carmen-robles': ['2:19:20', '2:21:00'],
+  'txistorro': ['2:25:53', '2:27:10'],
+  'margaret-miller': ['50:04', '51:48'],
+  'evaristo': ['6:15', '7:43'],
+  'nagore': ['3:25', '4:44'],
+  'alan-rodrigues': ['33:09', '34:40'],
+  'francisco-elizondo': ['2:01:27', '2:03:00'],
+  'obispo': ['1:35:47', '1:37:03'],
+  'claus-sluter': ['1:09:32', '1:11:24'],
+  'ranchera': ['18:38', '19:26'],
+  'ranchero': ['20:45', '21:45'],
+  'pajaro': ['1:00:02', '1:01:41'],
+  'camarera-filosofa': ['1:48:06', '1:49:45'],
+  'telefonistas': ['1:43:35', '1:45:03'],
+  'martin-luther-king': ['1:17:09', '1:19:01'],
+  'camarero-del-pardo': ['2:00:04', '2:00:50'],
+  'bob-martino': ['30:52', '31:30'],
+  'gina-zanella': ['2:38:05', '2:39:04'],
+  'rachel-sluter': ['1:13:58', '1:14:48'],
+  'angelines': ['1:06:57', '1:08:05'],
+  'padre-robert': ['11:46', '12:35'],
+  'crisostomo-carlucci': ['2:31:01', '2:32:05'],
+  'marcel-van-gal': ['2:34:41', '2:36:19'],
+  'medico': ['2:09:57', '2:10:58'],
+  'policia-lion-knife': ['39:26', '40:50'],
+  'policia-matt-laguarda': ['39:26', '40:50'],
+  'padre-lazzaroni': ['2:32:45', '2:33:40'],
+  'cura-del-pueblo': ['7:10', '7:43'],
+  'bruno-zanella': ['2:42:10', '2:43:23'],
+  'andreas-locher': ['2:44:54', '2:45:59'],
+  'madre-de-jorge': ['7:35', '8:00'],
+  'padre-de-jorge': ['6:46', '7:05'],
+  'monja-de-rodillas': ['2:24:00', '2:24:22'],
+  'dolores': ['2:25:27', '2:25:45'],
+  'camarero-bar-dinamarca': ['2:15:18', '2:15:35']
+};
+var D = {"escenas":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI","XXXII","XXXIII","XXXIV","XXXV","XXXVI","XXXVII","XXXVIII"],"lugar":{"I":"Un bar de Pamplona, 1991 · la infancia de Jorge","II":"Un bar de españoles en Orange, Tejas, 1963","III":"Orange · el padre Robert","IV":"Un rancho de Orange · la aspiradora","V":"El bar de Orange","VI":"Cena en el rancho","VII":"El bar de Orange · la dispensa","VIII":"Despedida en el rancho","IX":"Llamada a Pamplona","X":"Blue Moon, Las Cruces","XI":"Blue Moon · Margaret Miller","XII":"Blue Moon · Pájaro","XIII":"En la carretera · carta a Claus Sluter","XIV":"La Bellota, San Francisco","XV":"Fiesta en casa de los Sluter","XVI":"La coreografía y la llamada de Pamplona","XVII":"San Francisco · fragmento no transcrito","XVIII":"Despacho del obispo, Pamplona","XIX":"La carta al Vaticano y la Telefónica","XX":"Pub El Frontón, Madrid","XXI":"Calle Desengaño y Gran Vía","XXII":"En coche hacia El Pardo","XXIII":"Restaurante en El Pardo","XXIV":"Consulta del médico","XXV":"Un bar de españoles en Dinamarca","XXVI":"Reencuentro en Madrid","XXVII":"La despedida · rumbo a Roma","XXVIII":"Aeropuerto de Fiumicino","XXIX":"Palacio del Santo Oficio","XXX":"Bar de tapas Malandro, Roma","XXXI":"Santo Oficio · el sobre","XXXII":"Frente al Santo Oficio","XXXIII":"Despacho de Marcel van Gal","XXXIV":"Casa de Txistorro y Gina","XXXV":"Andreas Locher","XXXVI":"En la calle, Roma","XXXVII":"La habitación","XXXVIII":"Un bar de Madrid · Pamplona, 1991"},"mov":{"IV":"Música","VI":"Música","VII":"Música","IX":"Música","X":"Música · cantan y bailan una canción de caminar y de libertad","XII":"Blues de Pájaro","XIII":"Música","XV":"Música · todos bailan · respuesta coral a Martin Luther King","XVI":"Coreografía de Guantanamera","XXII":"Guantanamera cantada en el coche","XXIII":"Percusión de jazz · transición de tiempo","XXVII":"Música","XXVIII":"Música · el aeropuerto consternado","XXXVII":"Guantanamera en el recuerdo","XXXVIII":"Música final"},"total":23149,"p":[{"slug":"evaristo","nombre":"Evaristo","tag":"El tío que guarda la historia y decide contarla.","definicion":"El narrador que abre el bar cada mañana y empuja a Nagore hacia la verdad de su padre.","quien":"Regenta el bar de Pamplona en 1991 y es el tío de Nagore. Hace de narrador y maestro de ceremonias: cuenta la infancia de Jorge, entra en las escenas de Tejas como uno de los españoles del bar de Orange y es la voz de Pamplona al otro lado del teléfono cuando llama su hermano. Su tono es seco, irónico y práctico. Al final deja claro que es el hermano de Jorge y cierra la obra con una idea sencilla: el pasado se mira a los ojos y se sigue andando. Pide autoridad tranquila, humor socarrón y una ternura que no se exhibe.","momentos":[{"escena":"I","texto":"No se puede meter un país entero en una obra: hay que contar una historia."},{"escena":"XI","texto":"Estamos contando lo que tu padre nunca se atrevió a contar y tú necesitabas saber."},{"escena":"XXXVIII","texto":"No hace falta presumir ni avergonzarse del pasado: basta con mirarlo y seguir andando."}],"palabras":1307,"intervenciones":47,"escenas":11,"presencia":["I","II","III","V","VII","X","XI","XIV","XVI","XIX","XXXVIII"],"deducida":[],"intervPorEscena":{"I":11,"II":3,"III":1,"V":3,"VII":13,"X":1,"XI":4,"XIV":1,"XVI":8,"XIX":1,"XXXVIII":1},"orden":1},{"slug":"nagore","nombre":"Nagore","tag":"La hija que escribe para entender de dónde viene.","definicion":"Una escritora joven que empieza buscando un país y termina encontrando a su padre.","quien":"Sobrina de Evaristo, escribe con su cuaderno en una mesa del bar. Abre la obra preguntándose qué dolor ha heredado y por qué le pesa decir de dónde es. Como Evaristo, entra y sale del relato: hace de navarra emigrada en el bar de Orange, pone voz a la carta de Jorge a Claus Sluter y narra el desenlace. En la escena XI descubre que Jorge es su padre y que fue cura; en la XXXIII Jorge sueña con llamar Nagore a su hija. Pide una actriz capaz de pasar de la pregunta intelectual a la emoción de quien escucha su propia historia.","momentos":[{"escena":"I","texto":"Quiero entender por qué decir de dónde vengo me pesa tanto."},{"escena":"XI","texto":"¿Mi padre fue cura? ¿Cómo pudo callármelo toda la vida?"},{"escena":"XXXVIII","texto":"Él no veía que Carmen, a pesar de todo, quizá prefería criar sola a esa niña."}],"palabras":977,"intervenciones":42,"escenas":10,"presencia":["I","II","III","V","VII","X","XI","XIII","XIX","XXXVIII"],"deducida":[],"intervPorEscena":{"I":5,"II":16,"III":1,"V":5,"VII":7,"X":1,"XI":4,"XIII":1,"XIX":1,"XXXVIII":1},"orden":2},{"slug":"cura-del-pueblo","nombre":"Cura del pueblo","tag":"El que convence a un niño de doce años.","definicion":"La voz de la Iglesia que decide por Jorge antes de que Jorge pueda decidir nada.","quien":"Aparece en el relato de la infancia. Ve que Jorge es listo y presiona a la madre para mandarlo al seminario; después pasea a solas con el niño y le planta la idea de que negarse sería defraudar a Dios. Papel breve y decisivo: su suavidad persuasiva es el origen de todo el conflicto.","momentos":[{"escena":"I","texto":"Dios lo quiere sacerdote: si no lo mandas ahora, luego ya no querrá ir."},{"escena":"I","texto":"¿No te gustaría que Dios te quisiera más que a los otros niños?"}],"palabras":78,"intervenciones":6,"escenas":1,"presencia":["I"],"deducida":[],"intervPorEscena":{"I":6},"orden":3},{"slug":"madre-de-jorge","nombre":"Madre de Jorge","tag":"La madre que no quería dejarlo ir.","definicion":"Una mujer partida entre el miedo a Dios y el miedo a perder a su hijo.","quien":"Tiene seis hijos y Jorge, el penúltimo, es el que más quiere. Duda, se resiste y acaba cediendo porque no quiere defraudar a Dios. Tiene muy pocas réplicas, pero su despedida, y el reproche que Jorge arrastra toda la vida por no haberlo retenido, es el origen emocional de la obra.","momentos":[{"escena":"I","texto":"Es todavía muy pequeño; se me rompe el corazón si se va."},{"escena":"I","texto":"Yo tampoco quiero fallarle a Dios, hijo."}],"palabras":41,"intervenciones":5,"escenas":1,"presencia":["I"],"deducida":[],"intervPorEscena":{"I":5},"orden":4},{"slug":"padre-de-jorge","nombre":"Padre de Jorge","tag":"El hombre que deja decidir a su mujer.","definicion":"Una única réplica: la confianza absoluta de un hombre sencillo en su mujer.","quien":"Trabaja en la obra, como los hermanos mayores de Jorge. Su única intervención es decirle a su mujer que pensará lo que ella piense y hará lo que ella diga. Jorge recordará después un consejo suyo: no fiarse ni del propio padre. Papel mínimo, de presencia y verdad.","momentos":[{"escena":"I","texto":"Pensaré lo que tú pienses: me fío más de ti que de mí mismo."}],"palabras":20,"intervenciones":1,"escenas":1,"presencia":["I"],"deducida":[],"intervPorEscena":{"I":1},"orden":5},{"slug":"jorge-arizmendi","nombre":"Jorge Arizmendi","tag":"El cura que se atreve a empezar de nuevo.","definicion":"Llevado al seminario con doce años, a los treinta y tres sale a buscar la vida que nadie le dejó elegir.","quien":"Protagonista absoluto de la obra. Navarro de San Martín de Unx, entró en el seminario con doce años y en 1963 pide la dispensa y se marcha a Estados Unidos. Es guapo, expansivo y buen vendedor, pero por dentro arrastra el frío del seminario y la duda de si sabrá querer a sus hijos. Avanza a golpe de encuentros (rancheros, estafadores, una escritora, un bluesman ciego, un gurú del marketing) y aprende a costa de todos. Su gran conflicto es el secreto: oculta a Carmen que es cura. El papel exige resistencia, humor, monólogos líricos, discusión política y una fragilidad que aparece cuando menos se espera.","momentos":[{"escena":"II","texto":"Nunca aprendí a querer: ¿cómo voy a abrazar a mis hijos con un cuerpo que solo conoce el frío?"},{"escena":"XVIII","texto":"Decidí ser sacerdote siendo libre, y tengo derecho a dejar de serlo sin humillarme."},{"escena":"XXXVIII","texto":"No he podido ser dueño de mi pasado; quiero construir contigo mi futuro."}],"palabras":7622,"intervenciones":588,"escenas":36,"presencia":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVIII","XIX","XX","XXI","XXII","XXIII","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI","XXXII","XXXIII","XXXIV","XXXV","XXXVI","XXXVII","XXXVIII"],"deducida":[],"intervPorEscena":{"I":6,"II":18,"III":9,"IV":19,"V":9,"VI":14,"VII":12,"VIII":7,"IX":1,"X":57,"XI":30,"XII":14,"XIII":1,"XIV":20,"XV":64,"XVI":15,"XVIII":10,"XIX":28,"XX":18,"XXI":47,"XXII":13,"XXIII":41,"XXV":7,"XXVI":24,"XXVII":1,"XXVIII":3,"XXIX":6,"XXX":26,"XXXI":1,"XXXII":7,"XXXIII":11,"XXXIV":12,"XXXV":3,"XXXVI":6,"XXXVII":6,"XXXVIII":22},"orden":6},{"slug":"padre-robert","nombre":"Padre Robert","tag":"El escolapio que le presta quinientos dólares.","definicion":"La Iglesia amable: bendice el cambio y pone el dinero para empezar.","quien":"Padre escolapio de Orange. Recibe a Jorge sin reproches, le asegura que si Dios quiso que fuera cura ahora quiere que no lo sea, le presta dinero para un coche y lo manda a vender aspiradoras. Añade un toque de comedia: está convencido de que Jorge es italiano porque no parece español.","momentos":[{"escena":"III","texto":"Si Dios quiso que fueras sacerdote, ahora quiere que dejes de serlo. No hay nada que pelear."},{"escena":"III","texto":"No pareces español; tenía otra idea de los españoles."}],"palabras":135,"intervenciones":9,"escenas":1,"presencia":["III"],"deducida":[],"intervPorEscena":{"III":9},"orden":7},{"slug":"ranchera","nombre":"Ranchera","tag":"Una madre que ve volver a su hijo muerto.","definicion":"La esperanza convertida en hospitalidad: cree que Dios le ha devuelto a su hijo en la puerta de casa.","quien":"Ranchera de Orange (su marido la llama Patsy). Perdió a su hijo, alistado en el ejército, en un accidente de helicóptero. Al ver a Jorge, idéntico a él, le compra la aspiradora, lo invita a cenar y le ofrece el rancho en herencia si se queda. Es cálida, emotiva y tiene humor. Cuando Jorge se despide, acepta la negativa y le pide que cuente a sus hijos que el amor puede más que el dolor. Años después, Jorge le pedirá dinero y le prometerá volver.","momentos":[{"escena":"IV","texto":"Dios solo nos da la libertad una vez, y tenemos que hacernos cargo de ella."},{"escena":"VI","texto":"Contigo la vida vuelve a estar viva: si te quedas, este rancho será tuyo."},{"escena":"VIII","texto":"Cuéntales a tus hijos que te quisimos como a un hijo, porque el amor está por encima del dolor."}],"palabras":491,"intervenciones":30,"escenas":4,"presencia":["IV","VI","VIII","IX"],"deducida":[],"intervPorEscena":{"IV":12,"VI":14,"VIII":4},"orden":8},{"slug":"ranchero","nombre":"Ranchero","tag":"Un padre que calla más de lo que dice.","definicion":"El contrapeso sereno de su mujer: pudor, generosidad y una propuesta que cambia la vida de Jorge.","quien":"Marido de la Ranchera; según ella, un judío parlanchín de Brooklyn que la conquistó. Más contenido que ella, intenta no incomodar al visitante, paga la aspiradora con propina y formula la oferta del rancho, la obra de su vida. Al despedirse le indica a Jorge que busque en Las Cruces a Pájaro: esa deuda de gratitud acabará salvándolo.","momentos":[{"escena":"VI","texto":"Cuando apareciste con la aspiradora bajo el brazo, nuestra vida cambió."},{"escena":"VIII","texto":"Te esperaremos igualmente: la esperanza nos hace felices."},{"escena":"IX","texto":"Si paras cerca de Las Cruces, busca a un ciego al que llaman Pájaro."}],"palabras":407,"intervenciones":35,"escenas":4,"presencia":["IV","VI","VIII","IX"],"deducida":[],"intervPorEscena":{"IV":15,"VI":15,"VIII":5},"orden":9},{"slug":"bob-martino","nombre":"Bob Martino","tag":"El camarero que no quiere que le expliquen quién era su padre.","definicion":"Hijo de un pastor vasco emigrado, susceptible con sus orígenes y cómplice de la noche del Blue Moon.","quien":"Atiende la barra del Blue Moon, en Las Cruces. Su padre fue pastor vasco en América y su madre, francesa de Biarritz; cuando Jorge insiste en que Lekumberri está en Navarra, se ofende. Desprecia a Margaret en público y, según ella, vive atemorizado por la policía. Obedece a Pájaro cuando le pide cerrar y apagar las luces. Comedia seca con un punto de amenaza.","momentos":[{"escena":"X","texto":"Mi padre quería morir en su pueblo, pero nunca pudo volver. Así es la vida."},{"escena":"X","texto":"Oiga, amigo, ¿qué problema tiene usted con el origen de mis padres?"}],"palabras":229,"intervenciones":19,"escenas":3,"presencia":["X","XI","XII"],"deducida":[],"intervPorEscena":{"X":17,"XI":1,"XII":1},"orden":10},{"slug":"alan-rodrigues","nombre":"Alan Rodrigues","tag":"Un encantador de barra que te perdona y te roba.","definicion":"Simpático, místico y estafador: la primera lección de Jorge sobre la confianza.","quien":"Dice ser sobrino del señor Littlewood, el de las aspiradoras. Invita a Jorge a fumar marihuana, le habla de un Dios del amor, escucha su confesión sobre el perro que mató de niño y le da la absolución. Minutos después, con dos policías compinchados, lo deja sin dinero. Luego se arrodilla y le pide perdón. Papel muy rico para un actor con carisma: seductor, gracioso y turbio a la vez.","momentos":[{"escena":"X","texto":"Si rezas, con un poquito de marihuana se reza mucho mejor."},{"escena":"X","texto":"Te perdono lo del perro: tenías diez años y nadie te defendió."},{"escena":"XI","texto":"Perdóname ahora tú a mí, como yo te he perdonado."}],"palabras":683,"intervenciones":57,"escenas":2,"presencia":["X","XI"],"deducida":[],"intervPorEscena":{"X":57},"orden":11},{"slug":"margaret-miller","nombre":"Margaret Miller","tag":"La escritora libre que nunca le olvidará.","definicion":"Una mujer que se ha retirado del mundo para escribir y vivir sin pedir permiso a nadie.","quien":"Periodista y escritora reconocida en Nueva York, se ha refugiado en su hacienda de Las Cruces. En el Blue Moon la insultan por vivir con la libertad de un hombre. Avisa a Jorge del estafador, lo consuela, se ríe de su torpeza y pasa con él la noche en la que él pierde la virginidad. Su gran momento es la carta a Nagore (escena XI), un monólogo de más de 850 palabras lleno de humor, deseo y renuncia. Pide una actriz con mucha palabra, ironía y emoción contenida.","momentos":[{"escena":"XI","texto":"Cuando nos toca ser víctimas, nunca debemos pensar que la culpa es nuestra."},{"escena":"XI","texto":"Eres raro, y eso es justo lo que me gusta de ti."},{"escena":"XI","texto":"Sentí que era el hombre de mi vida y supe que sería la única vez."}],"palabras":1320,"intervenciones":39,"escenas":2,"presencia":["X","XI"],"deducida":[],"intervPorEscena":{"X":5,"XI":34},"orden":12},{"slug":"policia-lion-knife","nombre":"Policía Lion Knife","tag":"La autoridad que recita derechos y cobra en efectivo.","definicion":"Un policía tranquilo, correcto en las formas y corrupto en el fondo.","quien":"Llega con su compañero cuando Jorge y el Tipo de la barra fuman fuera del Blue Moon. Pide la documentación, recita los derechos del detenido y amenaza con cárcel y expulsión, hasta que el soborno cambia el tono. Margaret contará después que eran tan corruptos que hasta sus compañeros les temían.","momentos":[{"escena":"X","texto":"Hace frío para estar en la calle, ¿no les parece?"},{"escena":"X","texto":"Esto le va a costar la cárcel y la expulsión del país."},{"escena":"X","texto":"Que no se vuelva a repetir."}],"palabras":90,"intervenciones":8,"escenas":1,"presencia":["X"],"deducida":[],"intervPorEscena":{"X":8},"orden":13},{"slug":"policia-matt-laguarda","nombre":"Policía Matt Laguarda","tag":"El que cachea y encuentra la bolsa.","definicion":"El policía seco de la pareja: órdenes cortas y un apellido que no debería conocer.","quien":"Compañero de Lion Knife. Manda callar, cachea, encuentra la marihuana en el bolsillo de Jorge y se queda con el fajo de billetes. Llama al Tipo de la barra por su apellido sin haber visto sus papeles, un detalle que delata el montaje.","momentos":[{"escena":"X","texto":"Estamos en un país libre: aquí se puede hablar de todo."},{"escena":"X","texto":"Dense la vuelta y apoyen las manos contra el cristal."}],"palabras":49,"intervenciones":7,"escenas":1,"presencia":["X"],"deducida":[],"intervPorEscena":{"X":7},"orden":14},{"slug":"pajaro","nombre":"Pájaro","tag":"El bluesman ciego que devuelve un favor.","definicion":"Un músico ciego que canta la luz que no ve y enseña a Jorge a saber qué animal es.","quien":"Músico negro y ciego que canta blues en el Blue Moon; su canción sobre el nacimiento abre la escena XII. Pregunta a Jorge qué animal es, le hace cerrar los ojos y lo bautiza Águila. Los rancheros de Orange le pagaron una deuda hace años; ahora salda la suya dándole a Jorge dinero para seguir el viaje. Papel musical y poético, con humor y misterio.","momentos":[{"escena":"XII","texto":"Si no sabes qué animal eres, ¿cómo pretendes seguir tu viaje?"},{"escena":"XII","texto":"Cierra los ojos: vuelas alto y tienes garras grandes. Eres un águila."},{"escena":"XII","texto":"Déjate ayudar por los que son menos que tú: volarás gracias a los que pisan tierra."}],"palabras":455,"intervenciones":19,"escenas":1,"presencia":["XII"],"deducida":[],"intervPorEscena":{"XII":19},"orden":15},{"slug":"angelines","nombre":"Angelines","tag":"La hija del anarquista en un bar de San Francisco.","definicion":"Una camarera que repite con orgullo las palabras de su padre y las mira con ironía.","quien":"Recibe a Jorge en La Bellota, bar de españoles de San Francisco. Es hija de un catalán anarquista que tuvo que huir; recita su credo de la España humanista y librepensadora y remata diciendo que el bar se lo tragó. De esa réplica sale el título de la obra.","momentos":[{"escena":"XIV","texto":"Si crees en el azar, te los encuentras; si no, es que los buscas."},{"escena":"XIV","texto":"Mi padre era la España osada y libre. Ahora ya no: este bar se lo tragó."}],"palabras":159,"intervenciones":5,"escenas":1,"presencia":["XIV"],"deducida":[],"intervPorEscena":{"XIV":5},"orden":16},{"slug":"padre-anarquista","nombre":"Padre anarquista","tag":"Un exiliado que ya no dice nada.","definicion":"Presencia muda: el hombre del que habla su hija, sentado en su propio bar.","quien":"No tiene texto. Angelines lo señala en La Bellota y cuenta su historia: anarquista, o humanista, como él prefería decir, que tuvo que huir de España. Es la imagen silenciosa de una España derrotada que acabó tragada por un bar.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XIV"],"intervPorEscena":{},"orden":17},{"slug":"claus-sluter","nombre":"Claus Sluter","tag":"El rey del marketing que le da permiso para mentir.","definicion":"Un autor de éxito, afectuoso y persuasivo, que abre a Jorge las puertas de su casa.","quien":"Autor de El mejor vendedor de todos los tiempos, el libro que Jorge descubre en Orange. Responde a su carta, lo cita en La Bellota, se emociona y lo invita a la fiesta de disfraces de su hija. Le aconseja no contar que es cura y le reconoce el derecho al secreto, incluso a la mentira. Su advertencia sobre el disfraz, mal entendida, provoca el encuentro con Martin Luther King.","momentos":[{"escena":"XIV","texto":"Tu carta me recordó que no soy más que alguien que puede ayudar a otro."},{"escena":"XIV","texto":"Ahora tienes derecho al secreto; incluso a mentir para proteger este momento."},{"escena":"XIV","texto":"Disfrázate de lo que quieras, pero de negro no."}],"palabras":527,"intervenciones":24,"escenas":2,"presencia":["XIV","XV"],"deducida":[],"intervPorEscena":{"XIV":19,"XV":5},"orden":18},{"slug":"rachel-sluter","nombre":"Rachel Sluter","tag":"La cumpleañera que no entiende los dos besos.","definicion":"La anfitriona joven y directa de la fiesta de disfraces.","quien":"Hija de Claus. Disfrazada de hada, recibe a Jorge en su cumpleaños junto a Carmen, que vive con ella de intercambio. Le asombra la costumbre española de los dos besos y avisa de que a Martin Luther King no le hará gracia el disfraz de Jorge. En la escena XVII acompaña a Carmen mientras espera a Jorge, que no aparece.","momentos":[{"escena":"XV","texto":"Me parece muy fuerte que os deis dos besos sin conoceros de nada."},{"escena":"XV","texto":"No creo que al reverendo le guste compartir fiesta con alguien disfrazado de negro."},{"escena":"XVII","texto":"Déjalo, Carmen: no va a venir."}],"palabras":162,"intervenciones":17,"escenas":2,"presencia":["XV","XVII"],"deducida":[],"intervPorEscena":{"XV":16,"XVII":1},"orden":19},{"slug":"carmen-robles","nombre":"Carmen Robles","tag":"La madrileña que discute, se enamora y decide.","definicion":"Una mujer libre dentro de un país que no lo es, que no piensa dejar que nadie decida por ella.","quien":"Telefonista de Internacional en la Telefónica de la Gran Vía, de familia militar. Conoce a Jorge en San Francisco, disfrazada de hada. Es discutidora, rápida y divertida; defiende ante Jorge la paz del franquismo y, a la vez, le planta cara al médico que la humilla por estar embarazada sin casarse. Cuando descubre que Jorge es cura, lo acusa de cobarde por no haberle dejado decidir. Segundo papel en volumen de texto: comedia de pareja, monólogo lírico, estallido de rabia y una decisión final llena de matices.","momentos":[{"escena":"XV","texto":"No sé qué buscamos en el otro: alguien con quien apagar la luz al final del día."},{"escena":"XXIV","texto":"Lo que haga con mi vida me importa a mí y a nadie más que a mí."},{"escena":"XXVI","texto":"Si temías que no quisiera a un cura, esa decisión tenía que ser mía."}],"palabras":3002,"intervenciones":233,"escenas":13,"presencia":["XV","XVI","XVII","XIX","XX","XXI","XXII","XXIII","XXIV","XXV","XXVI","XXXVII","XXXVIII"],"deducida":[],"intervPorEscena":{"XV":59,"XVII":1,"XIX":10,"XX":10,"XXI":47,"XXII":15,"XXIII":27,"XXIV":10,"XXV":5,"XXVI":24,"XXXVII":4,"XXXVIII":21},"orden":20},{"slug":"martin-luther-king","nombre":"Martin Luther King","tag":"El reverendo que convierte un error en una lección.","definicion":"Una figura histórica tratada con humor y hondura: en lugar de apartar a Jorge, le habla.","quien":"Invitado de Claus Sluter en la fiesta. Al ver a Jorge con la cara pintada de negro, pide ser él quien le hable: bromea sobre Pamplona y los toros y luego le explica, sin dureza, lo que significa disfrazarse de negro en un país donde los negros luchan por sus derechos. Termina llamándole hermano. Personaje de un solo cuadro con un discurso central de mucha carga. El propio Sanzol aclara en el prólogo que este encuentro es inventado.","momentos":[{"escena":"XV","texto":"Disfrazarse es convertirse en quien no eres; también puede ser una forma de amar."},{"escena":"XV","texto":"Cuando te disfraces de negro, no te olvides de los que luchan por su libertad."},{"escena":"XV","texto":"No te olvides de nosotros, hermano."}],"palabras":390,"intervenciones":16,"escenas":1,"presencia":["XV"],"deducida":[],"intervPorEscena":{"XV":16},"orden":21},{"slug":"mujer-que-baila-con-tocado-de-estrellas","nombre":"Mujer que baila con tocado de estrellas","tag":"Una invitada con tocado de estrellas en la fiesta de los Sluter.","definicion":"Presencia festiva en la noche de disfraces de San Francisco.","quien":"Uno de los invitados disfrazados de la fiesta de cumpleaños de Rachel Sluter. La acotación sitúa en el centro de la sala a un hombre y dos mujeres bailando, y más tarde todos bailan. El texto no les asigna réplicas individuales. Papel de presencia, baile y ambiente. Solo hay una réplica muy breve atribuida genéricamente a «Mujer que baila», sin precisar cuál.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XV"],"intervPorEscena":{},"orden":22},{"slug":"mujer-que-baila-con-disfraz-de-china","nombre":"Mujer que baila con disfraz de china","tag":"Otra de las invitadas que bailan en la fiesta.","definicion":"Presencia festiva en la noche de disfraces de San Francisco.","quien":"Uno de los invitados disfrazados de la fiesta de cumpleaños de Rachel Sluter. La acotación sitúa en el centro de la sala a un hombre y dos mujeres bailando, y más tarde todos bailan. El texto no les asigna réplicas individuales. Papel de presencia, baile y ambiente. Solo hay una réplica muy breve atribuida genéricamente a «Mujer que baila», sin precisar cuál.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XV"],"intervPorEscena":{},"orden":23},{"slug":"hombre-que-baila-vestido-de-turco","nombre":"Hombre que baila vestido de turco","tag":"Un invitado disfrazado en la pista de baile.","definicion":"Presencia festiva en la noche de disfraces de San Francisco.","quien":"Uno de los invitados disfrazados de la fiesta de cumpleaños de Rachel Sluter. La acotación sitúa en el centro de la sala a un hombre y dos mujeres bailando, y más tarde todos bailan. El texto no les asigna réplicas individuales. Papel de presencia, baile y ambiente.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XV"],"intervPorEscena":{},"orden":24},{"slug":"hombre-que-baila-con-sombrero-mejicano","nombre":"Hombre que baila con sombrero mejicano","tag":"Otro invitado disfrazado en la pista de baile.","definicion":"Presencia festiva en la noche de disfraces de San Francisco.","quien":"Uno de los invitados disfrazados de la fiesta de cumpleaños de Rachel Sluter. La acotación sitúa en el centro de la sala a un hombre y dos mujeres bailando, y más tarde todos bailan. El texto no les asigna réplicas individuales. Papel de presencia, baile y ambiente.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XV"],"intervPorEscena":{},"orden":25},{"slug":"telefonistas","nombre":"Las Telefonistas","tag":"Cuatro voces de la Telefónica que acaban cambiando una vida.","definicion":"Un pequeño coro de centralita: fórmulas amables, turnos de trabajo y una nota que llega a la persona adecuada.","quien":"Perfil de casting que agrupa a las cuatro telefonistas del texto. La primera anuncia a Jorge, en San Francisco, la llamada de su hermano desde Pamplona. Ya en Madrid, Jorge busca a Carmen llamando a Internacional turno tras turno: la segunda y la tercera se llaman también Carmen y le repiten la misma fórmula; la cuarta, Marisa, apunta su número y se lo entrega a Carmen, animándola a llamar. Pide precisión cómica, ritmo de repetición y complicidad.","momentos":[{"escena":"XIX","texto":"Sin el apellido no puedo ayudarle: en mi turno habrá unas veinte Carmen."},{"escena":"XIX","texto":"¿No habrás conocido tú a un tal Jorge, disfrazado de Rey Baltasar?"},{"escena":"XIX","texto":"A mí me ha caído muy bien. Llámale, mujer."}],"palabras":395,"intervenciones":43,"escenas":2,"presencia":["XVI","XIX"],"deducida":[],"intervPorEscena":{"XVI":6,"XIX":37},"orden":26},{"slug":"obispo","nombre":"Obispo","tag":"El obispo que exige humildad a cambio de libertad.","definicion":"La institución con rostro humano y mano firme: quiere ayudar a Jorge siempre que Jorge se rinda.","quien":"Don Martín de Zalba, obispo de Pamplona. Comunica a Jorge que Roma ha rechazado su dispensa por falta de humildad y le presenta el rechazo como una segunda oportunidad. Compara el sacerdocio con tener un hijo o donar un riñón, le pregunta si hay una mujer y termina dictándole la carta que Roma quiere leer: que nunca fue apto para el sacerdocio. Un duelo dialéctico a la altura de Jorge.","momentos":[{"escena":"XVIII","texto":"Me hablas como un comerciante, de derechos y obligaciones, como un abogado."},{"escena":"XVIII","texto":"Ni ser sacerdote ni dejar de serlo es un derecho: tendrás que poner algo de tu parte."},{"escena":"XIX","texto":"Escribe que siempre careciste de la idoneidad para ser sacerdote."}],"palabras":557,"intervenciones":13,"escenas":2,"presencia":["XVIII","XIX"],"deducida":[],"intervPorEscena":{"XVIII":12,"XIX":1},"orden":27},{"slug":"camarera-filosofa","nombre":"Camarera filósofa","tag":"La camarera que enseña a esperar una llamada.","definicion":"Una mujer de barra que convierte lo cotidiano en poesía y la espera en un arte.","quien":"Atiende el pub El Frontón, en Madrid, donde Jorge espera la llamada de Carmen; antes es ella quien dicta el número del pub a la telefonista. Con el café en la mano le suelta una pequeña teoría de la vida como acto creativo: se puede conducir, moverse o contestar el teléfono con belleza. Niega ser filósofa: dice que su belleza la hace desde la barra.","momentos":[{"escena":"XX","texto":"O vives como creador de tu vida o como su destructor; no hay término medio."},{"escena":"XX","texto":"Esa impaciencia de esperar una llamada también se puede vivir de otra manera."},{"escena":"XX","texto":"Yo hago mi belleza desde aquí, desde la barra."}],"palabras":442,"intervenciones":14,"escenas":2,"presencia":["XIX","XX"],"deducida":[],"intervPorEscena":{"XIX":3,"XX":11},"orden":28},{"slug":"camarero-del-pardo","nombre":"Camarero del Pardo","tag":"Un camarero que recita la carta como un poema y teme los rumores.","definicion":"Servicial, surrealista y asustado: el franquismo cotidiano con delantal.","quien":"Atiende a Jorge y Carmen en el restaurante de El Pardo. Describe los platos del día con una ternura absurda y, tras el discurso de Francisco Elizondo, les pide que no hablen mal de Franco en su local, porque los rumores los acaba pagando él. Comedia con un fondo inquietante.","momentos":[{"escena":"XXIII","texto":"Hoy tenemos estofado de gamo inocente y un jabalí peludito con frutas del bosque."},{"escena":"XXIII","texto":"¿De verdad hace falta venir al Pardo a hablar mal de Franco?"},{"escena":"XXIII","texto":"Usted es el cliente, y el cliente siempre tiene la razón."}],"palabras":236,"intervenciones":12,"escenas":1,"presencia":["XXIII"],"deducida":[],"intervPorEscena":{"XXIII":12},"orden":29},{"slug":"francisco-elizondo","nombre":"Francisco Elizondo","tag":"Patxi, el pintor de estrellas al que no le pagan.","definicion":"Un viejo conocido navarro, cariñoso y desbordante, que acaba alzando la voz de los vencidos.","quien":"Patxi, amigo navarro de Jorge, pinta planisferios celestes en los techos. Reconoce a Jorge en El Pardo y le cuenta en confidencia que le han encargado uno para el palacio y no le pagan. De joven estuvo preso por el Partido Comunista. Vuelve a la mesa para un alegato sobre la dictadura, la propiedad y la memoria. Humor, euskera y un discurso político de peso.","momentos":[{"escena":"XXIII","texto":"Cuatro meses colgado de un andamio, y ahora tengo que pedir que me paguen como si fuera un favor."},{"escena":"XXIII","texto":"Lo que me deben es la metáfora de lo que se le debe a todo un pueblo."},{"escena":"XXIII","texto":"Nuestra lucha durará generaciones, pero ganaremos con leyes, no con armas."}],"palabras":611,"intervenciones":23,"escenas":1,"presencia":["XXIII"],"deducida":[],"intervPorEscena":{"XXIII":23},"orden":30},{"slug":"medico","nombre":"Médico","tag":"El doctor que interroga en lugar de atender.","definicion":"La moral del régimen con bata blanca: preguntas que juzgan.","quien":"Atiende a Carmen cuando ella sospecha que está embarazada. Desconfía de su prueba, le pregunta si está casada, si tiene novio y con cuántos hombres se acuesta, y remata aconsejándole reservar iglesia. Provoca los dos estallidos de Carmen. Papel breve, incómodo y muy preciso.","momentos":[{"escena":"XXIV","texto":"Esas pruebas de farmacia no son muy fiables. Vamos a ver."},{"escena":"XXIV","texto":"No parece usted muy convencida de tener novio."},{"escena":"XXIV","texto":"Por si acaso, vaya reservando iglesia, que en primavera vuelan las fechas."}],"palabras":106,"intervenciones":10,"escenas":1,"presencia":["XXIV"],"deducida":[],"intervPorEscena":{"XXIV":10},"orden":31},{"slug":"enfermera","nombre":"Enfermera","tag":"Testigo silencioso en la consulta.","definicion":"Una presencia muda en la escena más violenta para Carmen.","quien":"Aparece en la consulta junto al médico (escena XXIV). No tiene réplicas: su presencia silenciosa convierte el interrogatorio a Carmen en algo todavía más expuesto.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":["XXIV"],"deducida":[],"intervPorEscena":{},"orden":32},{"slug":"camarero-bar-dinamarca","nombre":"Camarero de un bar en Dinamarca","tag":"El que descuelga el teléfono en Dinamarca.","definicion":"Un gesto mínimo que trae la noticia más grande.","quien":"Atiende el bar de españoles, con bandera republicana, donde Jorge pasa sus días en Dinamarca. Descuelga el teléfono y le pasa la conferencia de Carmen: la llamada en la que ella le dirá que está embarazada.","momentos":[{"escena":"XXV","texto":"¿Sí? Tiene usted una conferencia."}],"palabras":3,"intervenciones":1,"escenas":1,"presencia":["XXV"],"deducida":[],"intervPorEscena":{"XXV":1},"orden":33},{"slug":"mujer-con-maleta","nombre":"Mujer con maleta","tag":"Una viajera en el aeropuerto de Fiumicino.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":34},{"slug":"hombre-con-maleta","nombre":"Hombre con maleta","tag":"Un viajero en el aeropuerto de Fiumicino.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":35},{"slug":"mujer-con-maleta-que-llora","nombre":"Mujer con maleta que llora","tag":"La viajera que no puede contener el llanto.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral. La acotación menciona a una chica que llora desconsolada.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":36},{"slug":"hombre-con-maletin","nombre":"Hombre con maletín","tag":"Un viajero de negocios en Fiumicino.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":37},{"slug":"cura-con-maletin","nombre":"Cura con maletín","tag":"Un sacerdote de paso en Fiumicino.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":38},{"slug":"hombre-con-periodico","nombre":"Hombre con periódico","tag":"El que lee la noticia en el aeropuerto.","definicion":"Una de las figuras del día en que muere el papa.","quien":"Parte del cuadro del aeropuerto de Fiumicino (escena XXVIII), donde Jorge aterriza justo cuando se anuncia la muerte de Juan XXIII. La acotación describe gente consternada y corrillos; el texto no le da réplicas. Papel de presencia en un cuadro coral.","momentos":[],"palabras":0,"intervenciones":0,"escenas":1,"presencia":[],"deducida":["XXVIII"],"intervPorEscena":{},"orden":39},{"slug":"monja-de-rodillas","nombre":"Monja de rodillas","tag":"La que da a Jorge la peor noticia.","definicion":"Una mujer que reza en medio del aeropuerto y pone nombre al desconcierto.","quien":"Reza de rodillas en Fiumicino. Es quien le dice a Jorge que el papa acaba de morir: su lamento por Juan XXIII cae sobre él como un mal presagio, porque sin papa no hay firma para su dispensa.","momentos":[{"escena":"XXVIII","texto":"El papa acaba de morir. Pobre Juan XXIII."}],"palabras":10,"intervenciones":2,"escenas":1,"presencia":["XXVIII"],"deducida":[],"intervPorEscena":{"XXVIII":2},"orden":40},{"slug":"crisostomo-carlucci","nombre":"Crisóstomo Carlucci","tag":"El funcionario honrado que no acepta el sobre.","definicion":"La cara incorruptible del Santo Oficio: amable, firme e imposible de mover.","quien":"Trabaja en el Palacio del Santo Oficio. Explica a Jorge que, sin papa, todo está paralizado. Al día siguiente Txistorro deja un sobre en su mesa y él, sin alzar la voz, ordena que lo retiren. Su silencio posterior es uno de los grandes momentos de comedia incómoda de la obra.","momentos":[{"escena":"XXIX","texto":"Hasta que no haya nuevo papa, hay procedimientos que quedan paralizados."},{"escena":"XXIX","texto":"La mejor ayuda es la paciencia."},{"escena":"XXXI","texto":"Retire ese sobre de mi mesa."}],"palabras":131,"intervenciones":10,"escenas":2,"presencia":["XXIX","XXXI"],"deducida":[],"intervPorEscena":{"XXIX":6,"XXXI":4},"orden":41},{"slug":"dolores","nombre":"Dolores","tag":"La del bar de tapas Malandro, en Roma.","definicion":"Una réplica y mucho oficio: el bar español de Roma.","quien":"Atiende en el bar de tapas Malandro, en Roma. Tiene una sola réplica: le ofrece a Txistorro un bocadillo del chorizo que le mandan sus primas del pueblo. Presencia de barra en el reencuentro de los dos amigos.","momentos":[{"escena":"XXX","texto":"¿Te preparo un bocadillo?"}],"palabras":6,"intervenciones":1,"escenas":1,"presencia":["XXX"],"deducida":[],"intervPorEscena":{"XXX":1},"orden":42},{"slug":"txistorro","nombre":"Txistorro","tag":"El cura amigo que resuelve las cosas por las malas.","definicion":"Un cura navarro en Roma, desbordante, tierno y peligroso, capaz de todo por un amigo.","quien":"Compañero de seminario de Jorge, lleva diez años en Roma con sotana y txapela; Gina lo llama Julián. Reconoce a Jorge en un bar, le saca la verdad y se lanza a conseguirle la dispensa: sobres, contactos, una pistola sobre la mesa y, al final, la paliza a Andreas Locher. Vive con Gina, de la que está enamorado, y lo cuenta con una sinceridad desarmante. Tercer papel en volumen de texto: pide mucha energía cómica, verdad emocional y una zona oscura.","momentos":[{"escena":"XXXII","texto":"¿Has venido a Roma a por tu dispensa o a presumir de escrúpulos?"},{"escena":"XXXIV","texto":"Esta mujer me ha enseñado a quererme y a quererla, y nunca he sentido culpa."},{"escena":"XXXVII","texto":"De críos nunca me dejaste solo; llevo toda la vida queriendo devolverte el favor."}],"palabras":1990,"intervenciones":112,"escenas":8,"presencia":["XXX","XXXI","XXXII","XXXIII","XXXIV","XXXV","XXXVI","XXXVII"],"deducida":[],"intervPorEscena":{"XXX":31,"XXXI":7,"XXXII":11,"XXXIII":23,"XXXIV":17,"XXXV":8,"XXXVI":5,"XXXVII":10},"orden":43},{"slug":"padre-lazzaroni","nombre":"Padre Lazzaroni","tag":"Un cura que aparece de la nada con un consejo.","definicion":"Una figura enigmática: aparece, señala el camino y desaparece.","quien":"Antonio Lazzaroni aborda a Jorge y Txistorro al salir del Santo Oficio. Sabe que han intentado sobornar a Carlucci y les recomienda hablar con Marcel van Gal, tercera planta, oficina nueve. No quiere nada a cambio. Se esfuma igual que apareció.","momentos":[{"escena":"XXXII","texto":"Con su permiso: ese no es el hombre que ustedes necesitan."},{"escena":"XXXII","texto":"No quiero nada, solo ayudar. Digan que van de mi parte."}],"palabras":80,"intervenciones":4,"escenas":1,"presencia":["XXXII"],"deducida":[],"intervPorEscena":{"XXXII":4},"orden":44},{"slug":"marcel-van-gal","nombre":"Marcel van Gal","tag":"El que firma, si hay papeles.","definicion":"Un burócrata del Vaticano que llama «papeles» al dinero y sube el precio.","quien":"Funcionario del Santo Oficio. Recibe el sobre, localiza la dispensa y anuncia que tiene todas las firmas menos la suya. Pide el doble. Cuando Txistorro pone una pistola sobre la mesa, firma, pero se niega a dejar salir el documento hasta que se lo arrebatan. Comedia de tensión creciente.","momentos":[{"escena":"XXXIII","texto":"Supongo que habrán traído papeles, ¿no?"},{"escena":"XXXIII","texto":"Tiene todas las firmas. Solo le falta una: la mía."},{"escena":"XXXIII","texto":"Lo que me han dado basta para lo que he hecho, pero para nada más."}],"palabras":130,"intervenciones":17,"escenas":1,"presencia":["XXXIII"],"deducida":[],"intervPorEscena":{"XXXIII":17},"orden":45},{"slug":"gina-zanella","nombre":"Gina Zanella","tag":"La mujer que vive con un cura y no se esconde.","definicion":"Hospitalaria, orgullosa y dolida: el amor que la Iglesia no reconoce.","quien":"Vive en Roma con Txistorro, a quien llama Julián. Recibe a Jorge con cariño y un plato de pasta, se niega a llamar a su hermano Bruno para no oír sus burlas y acaba haciéndolo por ellos. Le recuerda a Jorge que él, al menos, podrá casarse; otros ni siquiera pueden planteárselo.","momentos":[{"escena":"XXXIV","texto":"No te sientas desafortunado: tú al menos podrás casarte y llevar una vida normal."},{"escena":"XXXIV","texto":"Te he dicho que no te consiento que me hables así. ¡Fuera!"}],"palabras":167,"intervenciones":16,"escenas":1,"presencia":["XXXIV"],"deducida":[],"intervPorEscena":{"XXXIV":16},"orden":46},{"slug":"bruno-zanella","nombre":"Bruno Zanella","tag":"El hermano con contactos y mala lengua.","definicion":"Sarcástico y resolutivo: desprecia la pareja de su hermana, pero sabe a quién llamar.","quien":"Hermano de Gina, bien situado en las altas esferas. Llega burlándose de la pareja y de la castidad de Txistorro, pero ayuda en cuanto entiende que hay una mujer embarazada esperando. Señala a Andreas Locher, capaz de falsificar la firma del papa, y participa en su secuestro.","momentos":[{"escena":"XXXIV","texto":"¿Cómo están los tortolitos en su nido? ¿Y esa castidad, padre?"},{"escena":"XXXIV","texto":"Hay que hablar con Andreas Locher: tiene el sello y puede falsificar la firma."}],"palabras":70,"intervenciones":10,"escenas":2,"presencia":["XXXIV","XXXVII"],"deducida":[],"intervPorEscena":{"XXXIV":9,"XXXVII":1},"orden":47},{"slug":"andreas-locher","nombre":"Andreas Locher","tag":"El alemán que guarda el sello del papa.","definicion":"Frío, codicioso e implacable: el último obstáculo, y quien paga el precio más alto.","quien":"Sacerdote alemán que custodia el sello y puede falsificar la firma papal. Rechaza el maletín porque no es la cantidad pactada y despide a Jorge y Txistorro con consejos de paciencia. En la escena XXXVII aparece encapuchado, atado y amordazado mientras le obligan a firmar. Su destino queda en el aire.","momentos":[{"escena":"XXXV","texto":"Esta no es la cantidad que acordamos. Buenos días."},{"escena":"XXXV","texto":"Tengan paciencia: con el tiempo, las cosas se ven de otro color."}],"palabras":66,"intervenciones":7,"escenas":2,"presencia":["XXXV","XXXVII"],"deducida":[],"intervPorEscena":{"XXXV":7},"orden":48}]};
+(function(){
+  var SC = D.escenas;
+  var ALL = D.p.slice().sort(function(a,b){ return b.palabras-a.palabras || a.orden-b.orden; });
+  var MUDOS = ALL.filter(function(p){ return !p.palabras; }).sort(function(a,b){ return a.orden-b.orden; });
+  var P = ALL.filter(function(p){ return p.palabras > 0; });
+  var BY = {}; P.forEach(function(p,i){ p.rank = i+1; BY[p.slug] = p; });
+  var RECORTE = {'jorge-arizmendi':1,'margaret-miller':1};
+  var NOTAS = {
+    'jorge-arizmendi':['g','Texto redistribuido','Tendrá aproximadamente un 15 % menos de texto, que se redistribuirá a otros personajes.'],
+    'margaret-miller':['g','Texto redistribuido','Tendrá aproximadamente un 15 % menos de texto, que se redistribuirá a otros personajes.'],
+    'martin-luther-king':['','Nota de casting','Solo podría hacerlo un actor negro. Se aceptan sugerencias para la adaptación.']
+  };
+  var CORO = {slug:'coro', nombre:'Coro Físico', coro:true, tag:'Música, baile y transiciones. Incluye los ' + MUDOS.length + ' papeles sin texto.',
+    definicion:'El grupo que canta, baila y lleva a Jorge de un lugar a otro. Asume también todos los papeles sin texto.'};
+  var $ = function(s){ return document.querySelector(s); };
+  function num(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.'); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function norm(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+  function ini(n){ var w = n.split(' ').filter(function(x){ return !/^(de|del|la|las|el|los|que|con|un|en)$/i.test(x); }); return w.slice(0,2).map(function(x){ return x[0]; }).join('').toUpperCase(); }
+  function seg(t){ return t.split(':').reduce(function(a,b){ return a*60 + (+b); }, 0); }
+  function fragmento(p){
+    var f = FRAGMENTOS[p.slug]; if(!f) return '';
+    return '<div class="bloque"><h5>En escena · ' + f[0] + ' a ' + f[1] + '</h5><div class="yt"><div id="yt-player"></div></div></div>';
+  }
+  var ytListo = null, player = null, vigia = null;
+  function apiYT(){
+    if(!ytListo) ytListo = new Promise(function(res){
+      window.onYouTubeIframeAPIReady = res;
+      var t = document.createElement('script'); t.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(t);
+    });
+    return ytListo;
+  }
+  function montarFragmento(p){
+    var f = FRAGMENTOS[p.slug]; if(!f || !document.getElementById('yt-player')) return;
+    var a = seg(f[0]), b = seg(f[1]);
+    apiYT().then(function(){
+      if(!document.getElementById('yt-player')) return;
+      var pv = { start: a, end: b, autoplay: 1, mute: 1, playsinline: 1, rel: 0 };
+      if(location.protocol.indexOf('http') === 0) pv.origin = location.origin;
+      player = new YT.Player('yt-player', {
+        videoId: VIDEO_OBRA, width: '100%', height: '100%', playerVars: pv,
+        events: {
+          onReady: function(e){ e.target.mute(); e.target.seekTo(a, true); e.target.playVideo(); },
+          onStateChange: function(e){
+            clearInterval(vigia);
+            if(e.data === YT.PlayerState.PLAYING){
+              var t = e.target.getCurrentTime();
+              if(t < a - 1 || t > b + 1) e.target.seekTo(a, true);
+              vigia = setInterval(function(){ if(e.target.getCurrentTime() >= b){ e.target.pauseVideo(); e.target.seekTo(a, true); } }, 400);
+            }
+            if(e.data === YT.PlayerState.ENDED){ e.target.seekTo(a, true); e.target.pauseVideo(); }
+          }
+        }
+      });
+    });
+  }
+  function pararFragmento(){ clearInterval(vigia); if(player && player.destroy){ try{ player.destroy(); }catch(e){} } player = null; }
+  function nota(p){ var n = NOTAS[p.slug]; return n ? '<p class="nota ' + n[0] + '"><b>' + n[1] + '</b>' + n[2] + '</p>' : ''; }
+
+  function foto(p){
+    return '<div class="ph"><span class="ini">' + (p.coro ? 'CF' : ini(p.nombre)) + '</span>' + (p.rank ? '<span class="rk">' + String(p.rank).padStart(2,'0') + '</span>' : '') +
+      '<img src="assets/personajes/' + p.slug + '.jpg" alt="' + esc(p.nombre) + '" style="object-position:50% 40%" loading="lazy"></div>';
+  }
+  document.addEventListener('error', function(e){ if(e.target.tagName === 'IMG' && e.target.closest('.ph')) e.target.remove(); }, true);
+  document.addEventListener('load', function(e){ if(e.target.tagName === 'IMG') e.target.classList.add('ok'); }, true);
+
+  /* gráfico */
+  var chart = $('#chart'), rows = {};
+  chart.style.setProperty('--rows', P.length);
+  chart.innerHTML = P.map(function(p){
+    return '<div class="row' + (p.palabras < 200 ? ' menor' : '') + '" data-s="' + p.slug + '"><a class="nm" href="#/personaje/' + p.slug + '">' + esc(p.nombre) + '</a>' +
+      '<a class="tr" href="#/personaje/' + p.slug + '" tabindex="-1" aria-hidden="true"><span class="br"></span></a><span class="vl"></span></div>';
+  }).join('');
+  [].forEach.call(chart.children, function(r){ rows[r.dataset.s] = r; });
+  function metrica(m){
+    document.querySelectorAll('.tabs button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.m === m); });
+    chart.classList.toggle('esc', m === 'escenas');
+    var s = P.slice().sort(function(a,b){ return b[m]-a[m] || a.rank-b.rank; });
+    var max = m === 'escenas' ? SC.length : s[0][m];
+    s.forEach(function(p,i){
+      var r = rows[p.slug], rec = m === 'palabras' && RECORTE[p.slug];
+      r.style.transform = 'translateY(calc(' + i + ' * var(--rh)))';
+      r.classList.toggle('top1', i === 0);
+      r.classList.toggle('recorte', !!rec);
+      var b = r.querySelector('.br'); b.style.setProperty('--n', Math.max(1,p[m]));
+      b.style.width = (p[m] / max * 100) + '%';
+      r.querySelector('.vl').innerHTML = num(p[m]) + (rec ? '<small>−15 %</small>' : '');
+    });
+  }
+  document.querySelectorAll('.tabs button').forEach(function(b){ b.onclick = function(){ metrica(b.dataset.m); }; });
+  requestAnimationFrame(function(){ metrica('palabras'); });
+
+  /* galería */
+  function datos(p){
+    if(p.coro) return 'Movimiento · ' + MUDOS.length + ' papeles sin texto';
+    return num(p.palabras) + ' palabras · ' + p.escenas + (p.escenas === 1 ? ' escena' : ' escenas');
+  }
+  function card(p){
+    return '<a class="card' + (p.coro ? ' coro' : '') + '" href="#/personaje/' + p.slug + '">' + foto(p) +
+      '<h4>' + esc(p.nombre) + '</h4><p>' + esc(p.tag) + '</p><p class="dt">' + datos(p) + '</p></a>';
+  }
+  function galeria(){
+    var q = norm($('#buscar').value.trim());
+    var f = function(p){ return !q || norm(p.nombre).indexOf(q) > -1; };
+    var A = P.filter(function(p){ return p.palabras >= 200 && f(p); });
+    var B = P.filter(function(p){ return p.palabras < 200 && f(p); });
+    var coro = !q || norm('coro fisico').indexOf(q) > -1 || MUDOS.some(f);
+    var h = '';
+    if(A.length) h += '<h3 class="sub">Casting <span>más de 200 palabras</span></h3><div class="grid">' + A.map(card).join('') + '</div>';
+    if(B.length) h += '<h3 class="sub">Pequeñas partes <span>se combinarán entre el elenco</span></h3><div class="grid">' + B.map(card).join('') + '</div>';
+    if(coro) h += '<h3 class="sub">Coro Físico <span>movimiento y papeles sin texto</span></h3><div class="grid">' + card(CORO) + '</div>';
+    $('#grupos').innerHTML = h || '<p>Ningún personaje coincide.</p>';
+  }
+  $('#buscar').addEventListener('input', galeria);
+  galeria();
+
+  /* ficha */
+  var F = $('#ficha');
+  function eje(){ return '<div class="eje">' + SC.map(function(s,i){ return '<span' + (i === SC.length-1 ? ' style="direction:rtl"' : '') + '>' + ([0,9,19,29,37].indexOf(i) > -1 ? s : '') + '</span>'; }).join('') + '</div>'; }
+  function ficha(p){
+    var seq = P.concat([CORO]), k = seq.indexOf(p), prev = seq[k-1], next = seq[k+1];
+    var h = '<div class="ficha-in"><a class="volver" href="#/">← Volver</a>' + foto(p) + '<div>';
+    h += '<h2>' + esc(p.nombre) + '</h2><p class="def">' + esc(p.definicion) + '</p>';
+    if(!p.coro){
+      h += '<div class="nums"><div><b>' + num(p.palabras) + '</b><span>palabras</span></div><div><b>' + num(p.intervenciones) + '</b><span>intervenciones</span></div><div><b>' + p.escenas + '</b><span>de 38 escenas</span></div></div>';
+      h += nota(p);
+      h += fragmento(p);
+      if(p.palabras < 200) h += '<p class="nota"><b>Pequeña parte</b>Se combinará con otras partes breves en función de la cantidad de personas que seamos.</p>';
+      h += '<div class="bloque"><h5>Dónde aparece</h5><div class="strip">' + SC.map(function(s){
+        var c = p.intervPorEscena[s] ? 'h' : p.presencia.indexOf(s) > -1 ? 'a' : p.deducida.indexOf(s) > -1 ? 'd' : '';
+        var t = 'Escena ' + s + ' · ' + D.lugar[s] + (p.intervPorEscena[s] ? ' · ' + p.intervPorEscena[s] + ' interv.' : c === 'a' ? ' · sin texto' : '');
+        return '<i class="' + c + '" title="' + esc(t) + '"></i>';
+      }).join('') + '</div>' + eje() + '</div>';
+      h += '<div class="bloque"><h5>Quién es</h5><p class="quien">' + esc(p.quien) + '</p></div>';
+      if(p.momentos.length) h += '<div class="bloque"><h5>Momentos</h5><ul class="mom">' + p.momentos.map(function(m){ return '<li><em>Esc. ' + m.escena + '</em><p>' + esc(m.texto) + '</p></li>'; }).join('') + '</ul></div>';
+    } else {
+      h += '<div class="bloque"><h5>Papeles sin texto que hace el coro</h5><div class="chips">' + MUDOS.map(function(m){ return '<span>' + esc(m.nombre) + '</span>'; }).join('') + '</div></div>';
+      h += '<div class="bloque"><h5>Escenas con música o baile</h5><div class="strip">' + SC.map(function(s){
+        return '<i class="' + (D.mov[s] ? 'm' : '') + '" title="' + esc('Escena ' + s + (D.mov[s] ? ' · ' + D.mov[s] : '')) + '"></i>';
+      }).join('') + '</div>' + eje() + '</div>';
+      h += '<div class="bloque"><h5>Referencias</h5><div class="vids">' +
+        '<video controls preload="metadata" playsinline poster="assets/video/referencia-1-poster.jpg" src="assets/video/referencia-1.mp4"></video>' +
+        '<video controls preload="metadata" playsinline poster="assets/video/referencia-2-poster.jpg" src="assets/video/referencia-2.mp4"></video></div></div>';
+    }
+    h += '<div class="bloque" id="dir" hidden><h5>El director presenta el personaje</h5></div>';
+    h += '<nav class="pasar">' + (prev ? '<a href="#/personaje/' + prev.slug + '">← ' + esc(prev.nombre) + '</a>' : '<span></span>') + (next ? '<a href="#/personaje/' + next.slug + '">' + esc(next.nombre) + ' →</a>' : '') + '</nav></div></div>';
+    pararFragmento();
+    F.innerHTML = h;
+    montarFragmento(p);
+    var v = document.createElement('video'); v.controls = true; v.preload = 'metadata'; v.playsInline = true;
+    v.onloadedmetadata = function(){ var d = F.querySelector('#dir'); if(d){ d.appendChild(v); d.hidden = false; } };
+    v.src = 'assets/video/personajes/' + p.slug + '.mp4';
+  }
+  function ruta(){
+    var m = location.hash.match(/^#\/personaje\/([a-z0-9-]+)/);
+    var p = m && (m[1] === 'coro' ? CORO : BY[m[1]]);
+    if(!p && m) { location.replace('#/personaje/coro'); return; }
+    if(p){ ficha(p); F.hidden = false; F.scrollTop = 0; document.body.style.overflow = 'hidden'; document.title = p.nombre + ' · Casting'; }
+    else { pararFragmento(); F.hidden = true; F.innerHTML = ''; document.body.style.overflow = ''; document.title = 'Casting · El bar que se tragó a todos los españoles'; }
+  }
+  addEventListener('hashchange', ruta);
+  addEventListener('keydown', function(e){ if(e.key === 'Escape' && !F.hidden) location.hash = '#/'; });
+  ruta();
+})();
+</script>
+</body>
+</html>
